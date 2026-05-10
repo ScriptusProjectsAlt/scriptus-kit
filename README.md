@@ -3,7 +3,7 @@
 <h1>SCRIPTKIT</h1>
 
 <p>
-  <strong>User Level Rootkit that injects into explorer.exe and loads any dll into explorer.exe making the code look like a trusted program.</strong>
+  <strong>User Level Rootkit that injects into explorer.exe making the code look like a trusted program.</strong>
 </p>
 
 <p>
